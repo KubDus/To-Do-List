@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand
+    <% if(listTitle === 'Today') { %>
+      selected-list
+    <% } %>
+    " href="/">Today</a>
+    <a class="nav-link
+
+    <% if(listTitle === 'About') { %>
+      selected-list
+    <% } %>      
+    
+    " href="/about">About</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <% activeLists.forEach(function(list){ %>
+        <li>
+          <a class="nav-link list-link
+          <% if(listTitle === list.name) { %>
+            selected-list
+          <% } %>
+          " href="/<%= list.name %>"
+            ><%= list.name %></a>
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+
+    
+    
+    
+  </div>
+  
+  
+</nav>

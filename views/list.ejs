@@ -1,25 +1,60 @@
 
     <%- include("header"); -%>
-    
-    <div id="heading" class="box">
-      <h1> <%= listTitle %></h1>
-    </div>
 
-    <div class="box">
-      <% items.forEach(function(item){ %>
-      <div class="item">
-        <input type="checkbox" />
-        <p><%= item %></p>
+    <%- include("navbar"); -%>
+     
+    <div class="content">    
+      <div id="heading" class="box">
+        <h1> <%= listTitle %></h1>
       </div>
-      <% }); %>
 
-      <form class="item" action="/" method="post">
-        
-        <input type="text" name="newItem" placeholder="New Item" autocomplete="of" />
-        <button type="submit" name="list" value= <%= listTitle %>>+</button>
-      </form>
+      <div class="box">
+
+        <% if(items.length === 0) { %>
+          <form action="/deleteList" method="post">
+            <div class="item">
+              <input type="checkbox" name="listToDelete" value="<%=listTitle%>" onchange="this.form.submit()" />    
+              <p>Delete empty list</p>
+            </div> 
+          </form>
+        <% } %>
+
+
+        <form action="/delete" method="post">      
+          <% items.forEach(function(item){ %>
+          <div class="item">
+            <input type="checkbox" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()" />
+            <p><%= item.name %></p>
+          </div>        
+          <% }); %>
+          
+          <input type="hidden" name="listName", value="<%= listTitle %>"></input>   
+        </form>
+
+        <form class="item" action="/" method="post">        
+          <input type="text" name="newItem" placeholder="New Item" autocomplete="of" />
+          <button type="submit" name="list" value= <%= listTitle %>>+</button>
+        </form>
+      </div>
+
+
+      <div class="box">
+        <form class="item new-list" action="/newList" method="post">
+          <input type="text" name="newList" placeholder="New List" autocomplete="of">
+          <button type="submit">+</button>
+        </form>  
+      </div>
+
     </div>
-    <img src="test"> 
-  </body>
 
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+
+  </body>
+  
   <%- include('footer'); -%>
+
+ 
